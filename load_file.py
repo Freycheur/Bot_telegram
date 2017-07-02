@@ -10,7 +10,7 @@ import datetime
 import re
 from bs4 import BeautifulSoup
 
-BOT_TOKEN = "bot1"
+BOT_TOKEN = "bot123"
 CHAN_ID = "420421676:AAFYUn7967VCOLNBE-HQuTJPF2xElCo8agY"
 API_URL = "https://api.telegram.org/bot" + BOT_TOKEN + "/"
 

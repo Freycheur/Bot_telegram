@@ -10,8 +10,8 @@ import datetime
 import re
 from bs4 import BeautifulSoup
 
-BOT_TOKEN = "bot1"
-CHAN_ID = "420421676:AAFYUn7967VCOLNBE-HQuTJPF2xElCo8agY"
+BOT_TOKEN = "420421676:AAFYUn7967VCOLNBE-HQuTJPF2xElCo8agY"
+CHAN_ID = "420059618"
 API_URL = "https://api.telegram.org/bot" + BOT_TOKEN + "/"
 
 def sendMessage (text):
@@ -29,7 +29,7 @@ def downloadAndSend (url, extension):
     outfile = subprocess.check_output(["mktemp",
         "/tmp/fcomicsXXXXX","--suffix=."+extension]).decode('utf-8')
     outfile = outfile.replace ("\n", "")
-
+    print(outfile)
     subprocess.call(["curl", "-s", url, "-o", outfile])
     sendPhoto(outfile)
     subprocess.call(["rm", "-v", outfile])
@@ -40,10 +40,12 @@ if __name__ == '__main__':
     d = feedparser.parse ("http://www.lemonde.fr/rss/une.xml")
     for i in d.entries:
        date = datetime.datetime.fromtimestamp(mktime(i['published_parsed']))
+       print(date)
        if date < datetime.datetime.now() - datetime.timedelta(hours=4):
              continue
        link = i['links'][0]['href']
        image = i['links'][1]['href']
+       print(image)
        summary = re.sub('<.*$', '', i['summary'])
        title = i['title']
        sendMessage("*"+title+'*\n_' + summary + '_\n[lien](' + link + ')')
